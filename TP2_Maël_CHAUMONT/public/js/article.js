@@ -18,18 +18,21 @@ class Article {
         h3.innerHTML = this.title;
         p.innerText = this.desc;
         myBtn.innerText = 'View Detail';
+        myBtn.onclick = () => {logMessageWithDate(desc.innerText)};
         newArticle.id = this.id;
         h3.classList.add('title');
         newArticle.append(h3);
+        newArticle.append(p);
+        newArticle.append(myBtn);
         news.append(newArticle);
     }
 
     assertRequiredField() {
         if (this.title === '')
-            throw 'Titre vide';
+            throw new TitleNoneError();
     
         if (this.title.length < 3)
-            throw 'Titre trop court';
+            throw new TitleTooSmallError();
     }
 
     assertArticleUnicity() {
@@ -37,7 +40,7 @@ class Article {
     
         for (let i = 0; i < h3s.length; i++) {
             if (h3s[i].innerHTML.toLowerCase().trim() === this.title.toLowerCase().trim()) {
-                throw 'Erreur article deja existant';
+                throw new AlreadyExistingError();
             }
         }
     
@@ -47,9 +50,9 @@ class Article {
     addArticle() {
         try {
             clearErrors();
-            assertRequiredField(this.title)
-            assertArticleUnicity(this.title)
-            createArticleHtml(this.title);
+            this.assertRequiredField(this.title)
+            this.assertArticleUnicity(this.title)
+            this.createArticleHtml(this.title);
     
             return true;
         } catch (e) {
@@ -58,5 +61,9 @@ class Article {
     
             return false;
         }
+    }
+
+    toString() {
+        return 'Mon id -> '+this.id+' mon titre -> '+this.title+' madesc -> '+this.desc;
     }
 }

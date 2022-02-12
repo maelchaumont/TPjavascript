@@ -32,12 +32,18 @@
         </article>
     </section>
 
-    <button id="btnClic" class="btn" style="margin-top: 20px;">Mon super bouton</button>
+    <form id="addNewsForm" style="display:flex; align-items: center;">
+        <div>
+            <p>Nom de la news :</p>
+            <input name="titleToAdd" type="text" />
+        </div>
 
-    <form id="addNewsForm">
-        Nom de la news : <input name="titleToAdd" type="text" />
+        <div>
+            <p>Description de la news :</p>
+            <input name="descToAdd" type="text" />
+        </div>
 
-        <input type="submit" name="addNewsBtn" />
+        <input style="margin: 10px;" type="submit" name="addNewsBtn" />
     </form>
 </body>
 
@@ -48,6 +54,9 @@
 <script src="../public/js/html.js"></script>
 <script src="../public/js/article.js"></script>
 <script src="../public/js/main.js"></script>
+<script src="../public/js/TitleTooSmallError.js"></script>
+<script src="../public/js/AlreadyExistingError.js"></script>
+<script src="../public/js/TitleNoneError.js"></script>
 </script>
 
 </html>

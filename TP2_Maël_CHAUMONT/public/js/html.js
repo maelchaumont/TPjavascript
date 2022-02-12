@@ -1,11 +1,19 @@
 function bindButton(button){
 	button.onclick = function(event){
 		event.preventDefault();
-    	let champ = document.querySelector('input[name="titleToAdd"]');
-		
-		if(addArticle(champ.value))
-			champ.value = '';
+    	let title = document.querySelector('input[name="titleToAdd"]');
+        let desc = document.querySelector('input[name="descToAdd"]');
+		let articles = document.querySelectorAll('article');
+        let maxIdArticle = 0;
+        articles.forEach(element => {
+            if(parseInt(element.id.match('/\d*/') > maxIdArticle))
+                maxIdArticle = parseInt(element.id.match('/\d*/'));
+        });
 
+		if((new Article(maxIdArticle+1, title.value, desc.value)).addArticle()) {
+			title.value = '';
+            desc.value = '';
+        }
 		return false;
 	}
 }
