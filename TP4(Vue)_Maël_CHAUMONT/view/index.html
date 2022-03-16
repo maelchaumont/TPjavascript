@@ -12,16 +12,10 @@
 
     <h1>{{ title }}</h1>
 
-    <section v-if="getNbArticles !== 0" id="news">
+    <section v-if="getNbArticles !== 0" id="news" ref="news">
         <h2 id="nbArticles"> {{ getNbArticles }} {{ article_or_es }}</h2>
         <article v-for="(art, index) in articles">
-            <h3 class="title">{{ art.title }}</h3>
-            <p class="desc">{{ art.description }}</p>
-            <button @click="supprimeArticle(art.index)">Supprimer</button>
-            <button>View detail</button>
-            <!--
-            <article-news v-bind:title="art.title" v-bind:description="art.description" v-bind:index="index"></article-news>
-            -->
+            <articlenews v-bind:art="art"></articlenews>
         </article>
 
         <p> Ce paragraphe est dans la section news et ne sera affiché que s'il y a des news </p>
@@ -44,7 +38,7 @@
 
 <script src="../dist/js/duplicatearticleerror.js"></script>
 <script src="../dist/js/requiredpropertyerror.js"></script>
-<script src="../dist/js/ArticleNews."></script>
+<script src="../dist/js/ArticleNews.js"></script>
 <script src="../dist/js/article.js"></script>
 
 <script src="../dist/js/const.js"></script>

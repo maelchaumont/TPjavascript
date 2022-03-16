@@ -36,13 +36,14 @@ Vue.createApp ({
             else return 'article';
         }
     }
+}).component('articlenews', {
+    props: ['art'],
+
+    template: '<div>\
+                    <h3 class="title">{{art.title}}</h3>\
+                    <p class="desc">{{art.description}}</p>\
+                    <button @click="this.supprimeArticle(art.index)">Supprimer</button>\
+                    <button>View detail</button>\
+                </div>'
 }).mount('body');
 
-/*
-Vue.component ('article-news', { props: ['title', 'desciption', 'index'],
-
-    template: '<h3 class="title">{{title}}</h3>\
-                <p class="desc">{{description}}</p>\
-                <button @click="supprimeArticle(index)">Supprimer</button>\
-                <button>View detail</button>'
-});*/
