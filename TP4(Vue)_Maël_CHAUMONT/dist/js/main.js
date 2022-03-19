@@ -11,18 +11,15 @@ Vue.createApp ({
         getArticles() {
             return JSON.parse(ALLNEWSJSON);
         },
-        supprimeArticle(index) {
-            this.articles.splice(index, 1);
-        },
         addNewArticle(title, desc) {
-            if(typeof title === 'undefined' || typeof desc === 'undefined' || title === '' || desc === '') {
-                this.msgAddArticle = "Le titre ou la description n'est pas renseigné";
-                this.colorMsgAddArticle = "red";
-            }
-            else {
+            try {
+                new Article(this.articles[this.articles.length]+1, title, desc);
                 this.articles.push({id: `${this.articles[this.articles.length]+1}`, title: title, description: desc});
                 this.msgAddArticle = "L'ajout de la news a bien fonctionné";
                 this.colorMsgAddArticle = "green";
+            } catch (error) {
+                this.msgAddArticle = error.toString();
+                this.colorMsgAddArticle = "red";
             }
             event.preventDefault();
         }
@@ -37,13 +34,20 @@ Vue.createApp ({
         }
     }
 }).component('articlenews', {
-    props: ['art'],
+    props: ['art','index'],
 
-    template: '<div>\
-                    <h3 class="title">{{art.title}}</h3>\
-                    <p class="desc">{{art.description}}</p>\
-                    <button @click="this.supprimeArticle(art.index)">Supprimer</button>\
-                    <button>View detail</button>\
-                </div>'
+    template: '<h3 class="title">{{art.title}}</h3>\
+                <p class="desc">{{art.description}}</p>\
+                <button @click="this.supprimeArticle(index)">Supprimer</button>\
+                <button @click="this.viewDetail(index)">View detail</button>',
+    methods: {
+        viewDetail(ind) {
+            let paragraphes = document.querySelectorAll("article p");
+            if(paragraphes[ind].style.display == 'none')
+                paragraphes[ind].setAttribute('style','display: block;');
+            else
+                paragraphes[ind].setAttribute('style','display: none;');
+        }
+    }
 }).mount('body');
 

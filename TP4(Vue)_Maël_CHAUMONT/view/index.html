@@ -12,10 +12,10 @@
 
     <h1>{{ title }}</h1>
 
-    <section v-if="getNbArticles !== 0" id="news" ref="news">
+    <section v-if="getNbArticles !== 0" id="news" v-on:view-detail="viewDetail($event)">
         <h2 id="nbArticles"> {{ getNbArticles }} {{ article_or_es }}</h2>
         <article v-for="(art, index) in articles">
-            <articlenews v-bind:art="art"></articlenews>
+            <articlenews v-bind:art="art" v-bind:index="index"></articlenews>
         </article>
 
         <p> Ce paragraphe est dans la section news et ne sera affiché que s'il y a des news </p>

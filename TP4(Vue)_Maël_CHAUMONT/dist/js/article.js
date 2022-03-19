@@ -58,7 +58,7 @@ class Article {
     }
 
     assertRequiredProperty() {
-        if (this.title === '')
+        if (this.title === '' || this.description === '')
             throw new RequiredPropertyError();
     }
 }
